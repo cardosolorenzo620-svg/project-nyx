@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="theme-color" content="#080a10"><title>NYX — Les Cendres du Réel</title>
 <style>
-*{box-sizing:border-box}html,body{margin:0;background:#080a10;color:#eee;font-family:system-ui,sans-serif;overflow:hidden}#game{width:100vw;height:100dvh;position:relative;touch-action:none}canvas{display:block;width:100%;height:100%;background:#0b1018}#ui{position:absolute;inset:0;pointer-events:none}.top{position:absolute;top:10px;left:10px;right:10px;display:flex;gap:8px;justify-content:space-between}.panel{background:#090d16dd;border:1px solid #ffffff18;border-radius:14px;padding:9px 11px;backdrop-filter:blur(8px)}.bars{width:130px}.bar{height:7px;background:#ffffff14;border-radius:8px;margin-top:4px;overflow:hidden}.hp{height:100%;background:#ef6680}.will{height:100%;background:#65d9e8}.hint{position:absolute;top:82px;left:50%;transform:translateX(-50%);text-align:center;max-width:90%;font-size:13px;color:#cbd3e8}.dialog{position:absolute;left:10px;right:10px;bottom:16px;background:#0c111ddd;border:1px solid #ffffff20;border-radius:18px;padding:15px;pointer-events:auto}.name{color:#72e4f4;font-weight:900;font-size:12px;text-transform:uppercase;letter-spacing:.12em}.text{font-size:16px;line-height:1.45;margin:6px 0 12px}.choices{display:grid;gap:8px}.choice{border:1px solid #ffffff18;background:#171e2d;color:#fff;border-radius:12px;padding:12px;text-align:left;font-weight:750}.choice:active{transform:scale(.98)}.touch{position:absolute;bottom:18px;left:18px;width:150px;height:150px;pointer-events:auto}.pad{position:absolute;width:52px;height:52px;border-radius:16px;background:#ffffff10;border:1px solid #ffffff18;color:#fff;font-size:23px}.up{left:49px;top:0}.down{left:49px;bottom:0}.left{left:0;top:49px}.right{right:0;top:49px}.action{position:absolute;right:22px;bottom:42px;width:74px;height:74px;border-radius:50%;border:1px solid #ffffff25;background:#7c5cffcc;color:#fff;font-weight:900;font-size:15px;pointer-events:auto}.inv{position:absolute;right:12px;top:78px;max-width:180px;font-size:11px;text-align:right}.hidden{display:none}.title{position:absolute;inset:0;background:radial-gradient(circle,#1d2540,#080a10 65%);display:grid;place-items:center;text-align:center;padding:24px;pointer-events:auto}.title h1{font-size:clamp(55px,18vw,100px);margin:0;letter-spacing:.12em;text-shadow:0 0 35px #9276ff88}.title p{max-width:430px;color:#bbc3d8;line-height:1.5}.start{padding:15px 24px;border:0;border-radius:14px;background:linear-gradient(135deg,#7558ee,#45a7b9);color:#fff;font-weight:900;font-size:16px}
+*{box-sizing:border-box}html,body{margin:0;background:#080a10;color:#eee;font-family:system-ui,sans-serif;overflow:hidden}#game{width:100vw;height:100dvh;position:relative;touch-action:none}canvas{display:block;width:100%;height:100%;background:#0b1018}#ui{position:absolute;inset:0;pointer-events:none}.top{position:absolute;top:10px;left:10px;right:10px;display:flex;gap:8px;justify-content:space-between}.panel{background:#090d16dd;border:1px solid #ffffff18;border-radius:14px;padding:9px 11px;backdrop-filter:blur(8px)}.bars{width:130px}.bar{height:7px;background:#ffffff14;border-radius:8px;margin-top:4px;overflow:hidden}.hp{height:100%;background:#ef6680}.will{height:100%;background:#65d9e8}.objective{position:absolute;top:82px;left:10px;right:10px;text-align:center;font-size:12px;color:#dce6ff}.reset{position:absolute;right:12px;top:122px;pointer-events:auto;font-size:11px}.hint{position:absolute;top:155px;left:50%;transform:translateX(-50%);text-align:center;max-width:90%;font-size:13px;color:#cbd3e8}.dialog{z-index:10;position:absolute;left:10px;right:10px;bottom:16px;background:#0c111ddd;border:1px solid #ffffff20;border-radius:18px;padding:15px;pointer-events:auto}.name{color:#72e4f4;font-weight:900;font-size:12px;text-transform:uppercase;letter-spacing:.12em}.text{font-size:16px;line-height:1.45;margin:6px 0 12px}.choices{display:grid;gap:8px}.choice{border:1px solid #ffffff18;background:#171e2d;color:#fff;border-radius:12px;padding:12px;text-align:left;font-weight:750}.choice:active{transform:scale(.98)}.touch{position:absolute;bottom:18px;left:18px;width:150px;height:150px;pointer-events:auto}.pad{position:absolute;width:52px;height:52px;border-radius:16px;background:#ffffff10;border:1px solid #ffffff18;color:#fff;font-size:23px}.up{left:49px;top:0}.down{left:49px;bottom:0}.left{left:0;top:49px}.right{right:0;top:49px}.action{z-index:5;position:absolute;right:22px;bottom:42px;width:74px;height:74px;border-radius:50%;border:1px solid #ffffff25;background:#7c5cffcc;color:#fff;font-weight:900;font-size:15px;pointer-events:auto}.inv{position:absolute;right:12px;top:78px;max-width:180px;font-size:11px;text-align:right}.hidden{display:none}.title{position:absolute;inset:0;background:radial-gradient(circle,#1d2540,#080a10 65%);display:grid;place-items:center;text-align:center;padding:24px;pointer-events:auto}.title h1{font-size:clamp(55px,18vw,100px);margin:0;letter-spacing:.12em;text-shadow:0 0 35px #9276ff88}.title p{max-width:430px;color:#bbc3d8;line-height:1.5}.start{padding:15px 24px;border:0;border-radius:14px;background:linear-gradient(135deg,#7558ee,#45a7b9);color:#fff;font-weight:900;font-size:16px}
 </style></head><body><div id="game"><canvas id="c"></canvas><div id="ui"></div><div id="title" class="title"><div><div style="letter-spacing:.2em;color:#72e4f4;font-weight:900">UNE EXPÉRIENCE NYX</div><h1>NYX</h1><h2>LES CENDRES DU RÉEL</h2><p>Une aventure d'exploration, de mystère et de choix. Cette fois, tu ne regardes pas une histoire : <b>tu la traverses.</b></p><button class="start" onclick="start()">COMMENCER</button></div></div></div>
 <script>
 const C=document.getElementById('c'),ctx=C.getContext('2d'),ui=document.getElementById('ui');let W,H,run=false,last=0,keys={},dialog=null;
@@ -13,11 +13,76 @@ function start(){let t=document.getElementById('title');if(t)t.remove();run=true
 function save(){localStorage.setItem('nyx-game',JSON.stringify({p,items,flags,doors:doors.map(d=>({open:d.open})),npcs:npcs.map(n=>({talk:n.talk}))}))}function resetGame(){if(confirm('Effacer la sauvegarde et recommencer ?')){localStorage.removeItem('nyx-game');location.reload()}}function load(){try{let s=JSON.parse(localStorage.getItem('nyx-game'));if(s){p=Object.assign(p,s.p||{});items=Array.isArray(s.items)?s.items:[];flags=s.flags||{};if(Array.isArray(s.doors))s.doors.forEach((x,i)=>{if(doors[i])doors[i].open=!!x.open});if(Array.isArray(s.npcs))s.npcs.forEach((x,i)=>{if(npcs[i])npcs[i].talk=!!x.talk})}}catch(e){localStorage.removeItem('nyx-game')}}
 load();
 function near(a,b,d=70){return Math.hypot(a.x-b.x,a.y-b.y)<d}
-function interact(){if(dialog)return;
-let n=npcs.find(n=>near(p,n,75));if(n){dialog={name:n.name,text:n.name==='Mara'?(n.talk?'« Tu as déjà la réponse. Regarde derrière toi.':'« Tu es arrivé. Le bâtiment change quand quelqu’un le remarque. »'):'« La porte 13 ne s’ouvre pas avec une clé. Elle s’ouvre avec un souvenir. »',choices:[{t:'Répondre',f:()=>{n.talk=1;flags.mara=true;dialog=null;save()}},{t:'Partir',f:()=>dialog=null}]};return}
-let d=doors.find(d=>near(p,{x:d.x+d.w/2,y:d.y+d.h/2},80));if(d){if(d.name==='Porte noire'&&!d.open){d.open=true;flags.blackdoor=true;dialog={name:'Porte noire',text:'Le verrou cède. Derrière : une salle qui ne devrait pas exister.',choices:[{t:'Entrer',f:()=>{p.x=640;p.y=210;dialog=null}},{t:'Refermer',f:()=>dialog=null}]}}else if(d.name==='Porte 13'&&!d.open){if(flags.memory){d.open=true;dialog={name:'Porte 13',text:'La porte reconnaît ton souvenir.',choices:[{t:'Entrer',f:()=>{p.x=930;p.y=350;dialog=null;flags.sanctum=true}},{t:'Attendre',f:()=>dialog=null}]}}else{dialog={name:'Porte 13',text:'Elle murmure : « Souviens-toi de ce que tu as perdu. »',choices:[{t:'Chercher la réponse',f:()=>{flags.memory=true;dialog=null;save()}},{t:'Partir',f:()=>dialog=null}]}}}return}
-if(Math.hypot(p.x-1250,p.y-610)<75&&!flags.core){flags.core=true;items.push('Fragment du Réel');dialog={name:'Fragment',text:'Un éclat de verre flotte dans l’air. Tu le touches. Une seconde de ta vie disparaît.',choices:[{t:'Continuer',f:()=>dialog=null}]};save()}
+function interact(){
+if(dialog)return;
+let n=npcs.find(n=>near(p,n,78));
+if(n){
+  if(n.name==='Mara'){
+    if(!flags.maraMet){
+      dialog={name:'Mara',text:'« Tu es arrivé. Le bâtiment change quand quelqu’un le remarque. Et toi… tu l’as remarqué. »',choices:[
+        {t:'« Qui es-tu ? »',f:()=>{flags.maraMet=true;flags.maraTruth=true;dialog={name:'Mara',text:'« Quelqu’un qui a essayé de partir. La Porte 13 m’a rendu un souvenir… mais pas la personne à qui il appartenait. »',choices:[{t:'« Et moi, que dois-je faire ? »',f:()=>{flags.maraClue=true;dialog={name:'Mara',text:'« Trouve le Fragment du Réel. Quand tu l’auras, le Veilleur te dira ce que la porte attend de toi. »',choices:[{t:'Compris.',f:()=>{dialog=null;save()}}]}}},{t:'Partir',f:()=>{dialog=null;save()}}]}} ,
+        {t:'« Que veux-tu ? »',f:()=>{flags.maraRequest=true;dialog={name:'Mara',text:'« Rien. Je veux seulement savoir si tu choisiras de regarder derrière les portes… ou de les laisser choisir pour toi. »',choices:[{t:'« Je regarderai. »',f:()=>{flags.maraClue=true;dialog=null;save()}},{t:'Partir',f:()=>{dialog=null;save()}}]}}},
+        {t:'Partir',f:()=>{dialog=null}}
+      ]};
+    }else{
+      dialog={name:'Mara',text:flags.maraClue?'« Le Fragment est la clé. Ne laisse pas le Veilleur décider à ta place. »':'« Tu as déjà la réponse. Regarde derrière toi. »',choices:[
+        {t:'« J’ai compris. »',f:()=>{dialog=null;save()}},{t:'Partir',f:()=>dialog=null}
+      ]};
+    }
+    return;
+  }
+  if(n.name==='Le Veilleur'){
+    if(!flags.watcherMet){
+      dialog={name:'Le Veilleur',text:'« La Porte 13 ne s’ouvre pas avec une clé. Elle s’ouvre avec un souvenir. Mais les souvenirs mentent. »',choices:[
+        {t:'« Que sais-tu de la Porte 13 ? »',f:()=>{flags.watcherMet=true;flags.watcherClue=true;dialog={name:'Le Veilleur',text:'« Elle ouvre un lieu qui n’existe qu’une fois. Apporte-lui le Fragment du Réel et elle te montrera ce que tu as oublié. »',choices:[{t:'« Et si je refuse ? »',f:()=>{flags.watcherChoice=true;dialog={name:'Le Veilleur',text:'« Alors le bâtiment continuera de te suivre. »',choices:[{t:'Continuer',f:()=>{dialog=null;save()}}]}}},{t:'Partir',f:()=>{dialog=null;save()}}]}} ,
+        {t:'« Pourquoi m’aider ? »',f:()=>{flags.watcherDebt=true;dialog={name:'Le Veilleur',text:'« Je ne t’aide pas. Je vérifie simplement si tu es capable de choisir. »',choices:[{t:'« Alors je choisirai. »',f:()=>{flags.watcherMet=true;dialog=null;save()}},{t:'Partir',f:()=>{dialog=null;save()}}]}}},
+        {t:'Partir',f:()=>dialog=null}
+      ]};
+    }else{
+      dialog={name:'Le Veilleur',text:flags.core?'« Tu as le Fragment. Maintenant, la Porte 13 peut entendre ton souvenir. »':'« Cherche le Fragment du Réel. Ensuite seulement, reviens me voir. »',choices:[{t:'Partir',f:()=>dialog=null}]};
+    }
+    return;
+  }
 }
+let d=doors.find(d=>near(p,{x:d.x+d.w/2,y:d.y+d.h/2},82));
+if(d){
+  if(d.name==='Porte noire'){
+    if(!d.open){
+      dialog={name:'Porte noire',text:flags.maraClue?'Le verrou attend. Quelque chose derrière la porte respire au même rythme que toi.':'Le verrou est froid. Une inscription presque effacée dit : « Celui qui remarque ouvre. »',choices:[
+        {t:'Ouvrir',f:()=>{d.open=true;flags.blackdoor=true;dialog={name:'Porte noire',text:'Le verrou cède. Derrière : une salle qui ne devrait pas exister.',choices:[{t:'Entrer',f:()=>{p.x=640;p.y=210;flags.blackroom=true;dialog=null;save()}},{t:'Refermer',f:()=>{d.open=false;dialog=null;save()}}]}}},
+        {t:'Partir',f:()=>dialog=null}
+      ]};
+    }else{
+      dialog={name:'Porte noire',text:'La salle impossible est toujours là, derrière le seuil.',choices:[{t:'Entrer',f:()=>{p.x=640;p.y=210;flags.blackroom=true;dialog=null;save()}},{t:'Refermer',f:()=>{d.open=false;dialog=null;save()}},{t:'Partir',f:()=>dialog=null}]};
+    }
+    return;
+  }
+  if(d.name==='Porte 13'){
+    if(!flags.core){
+      dialog={name:'Porte 13',text:'Elle murmure : « Souviens-toi de ce que tu as perdu. »',choices:[
+        {t:'Chercher le Fragment',f:()=>{flags.memoryHint=true;dialog=null;save()}},
+        {t:'Forcer la porte',f:()=>{p.will=Math.max(0,p.will-1);flags.forced13=true;dialog={name:'Porte 13',text:'La porte refuse. Quelque chose vient de remarquer ta présence.',choices:[{t:'Reculer',f:()=>{dialog=null;save()}}]}}},
+        {t:'Partir',f:()=>dialog=null}
+      ]};
+    }else{
+      dialog={name:'Porte 13',text:'Le Fragment vibre. La porte reconnaît quelque chose en toi.',choices:[
+        {t:'Entrer',f:()=>{d.open=true;flags.sanctum=true;p.x=930;p.y=350;dialog=null;save()}},
+        {t:'Attendre',f:()=>{flags.waited13=true;dialog={name:'Porte 13',text:'Un souvenir remonte. Ce n’est pas le tien.',choices:[{t:'Entrer malgré tout',f:()=>{d.open=true;flags.sanctum=true;p.x=930;p.y=350;dialog=null;save()}},{t:'Partir',f:()=>{dialog=null;save()}}]}}},
+        {t:'Partir',f:()=>dialog=null}
+      ]};
+    }
+    return;
+  }
+}
+if(Math.hypot(p.x-1250,p.y-610)<78&&!flags.core){
+  flags.core=true;
+  if(!items.includes('Fragment du Réel'))items.push('Fragment du Réel');
+  p.will=Math.min(5,p.will+1);
+  dialog={name:'Fragment',text:'Un éclat de verre flotte dans l’air. Tu le touches. Une seconde de ta vie disparaît — et pourtant, tu te sens plus lucide.',choices:[{t:'Continuer',f:()=>{dialog=null;save()}}]};
+  save();
+}
+}
+
 function move(dt){let sp=190*dt,dx=0,dy=0;if(keys.up)dy--;if(keys.down)dy++;if(keys.left)dx--;if(keys.right)dx++;if(dx&&dy){dx*=.707;dy*=.707}let nx=p.x+dx*sp,ny=p.y+dy*sp;if(!hit(nx,p.y))p.x=nx;if(!hit(p.x,ny))p.y=ny;cam.x=Math.max(0,Math.min(world.w-W,p.x-W/2));cam.y=Math.max(0,Math.min(world.h-H,p.y-H/2))}
 function hit(x,y){let r=18;return walls.some(a=>x+r>a.x&&x-r<a.x+a.w&&y+r>a.y&&y-r<a.y+a.h)||doors.some(d=>!d.open&&x+r>d.x&&x-r<d.x+d.w&&y+r>d.y&&y-r<d.y+d.h)}
 function draw(){ctx.clearRect(0,0,W,H);ctx.save();ctx.translate(-cam.x,-cam.y);
@@ -27,8 +92,17 @@ ctx.fillStyle='#1c2738';ctx.fillRect(90,70,450,500);ctx.fillStyle='#182b31';ctx.
 npcs.forEach(n=>{ctx.fillStyle=n.color;ctx.beginPath();ctx.arc(n.x,n.y,18,0,7);ctx.fill();ctx.fillStyle='#dce6ff';ctx.font='12px system-ui';ctx.fillText(n.name,n.x-25,n.y-27)});
 if(!flags.core){ctx.fillStyle='#a78bfa';ctx.shadowBlur=25;ctx.shadowColor='#a78bfa';ctx.beginPath();ctx.arc(1250,610,13,0,7);ctx.fill();ctx.shadowBlur=0}
 ctx.fillStyle='#72e4f4';ctx.beginPath();ctx.arc(p.x,p.y,19,0,7);ctx.fill();ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(p.x-5,p.y-3,3,0,7);ctx.arc(p.x+5,p.y-3,3,0,7);ctx.fill();ctx.restore()}
-function hud(){ui.innerHTML='<div class="top"><div class="panel bars">❤️ '+p.hp+'/10<div class="bar"><div class="hp" style="width:'+p.hp*10+'%"></div></div>🧠 '+p.will+'/5<div class="bar"><div class="will" style="width:'+p.will*20+'%"></div></div></div><div class="panel">🎒 '+(items.length?items.join(' · '):'Vide')+'</div></div><button class="panel" style="position:absolute;right:12px;top:135px;pointer-events:auto" onclick="resetGame()">🗑️ Nouvelle partie</button><div class="hint">Déplace-toi • Explore • Approche-toi des personnages et objets • ⚡ pour interagir</div><div class="touch"><button class="pad up" data-k="up">▲</button><button class="pad down" data-k="down">▼</button><button class="pad left" data-k="left">◀</button><button class="pad right" data-k="right">▶</button></div><button class="action" onclick="interact()">⚡<br>AGIR</button>'+(dialog?'<div class="dialog"><div class="name">'+dialog.name+'</div><div class="text">'+dialog.text+'</div><div class="choices">'+dialog.choices.map((c,i)=>'<button type="button" class="choice" data-choice="'+i+'">'+c.t+'</button>').join('')+'</div></div>':'')}
-document.addEventListener('keydown',e=>{let k={ArrowUp:'up',w:'up',ArrowDown:'down',s:'down',ArrowLeft:'left',a:'left',ArrowRight:'right',d:'right'}[e.key];if(k)keys[k]=true;if(e.key===' '||e.key==='e')interact()});document.addEventListener('keyup',e=>{let k={ArrowUp:'up',w:'up',ArrowDown:'down',s:'down',ArrowLeft:'left',a:'left',ArrowRight:'right',d:'right'}[e.key];if(k)keys[k]=false});
-document.addEventListener('pointerup',e=>{let b=e.target.closest&&e.target.closest('.choice');if(b&&dialog){e.preventDefault();let i=Number(b.dataset.choice);let choice=dialog.choices[i];if(choice&&typeof choice.f==='function')choice.f();}},true);ui.addEventListener('pointerdown',e=>{let b=e.target.closest('.pad');if(b){e.preventDefault();keys[b.dataset.k]=true}});ui.addEventListener('pointerup',e=>{let b=e.target.closest('.pad');if(b){e.preventDefault();keys[b.dataset.k]=false}});ui.addEventListener('pointercancel',e=>{let b=e.target.closest('.pad');if(b)keys[b.dataset.k]=false});ui.addEventListener('touchstart',e=>{let b=e.target.closest('.pad');if(b){e.preventDefault();keys[b.dataset.k]=true}},{passive:false});ui.addEventListener('touchend',e=>{let b=e.target.closest('.pad');if(b){e.preventDefault();keys[b.dataset.k]=false}},{passive:false});ui.addEventListener('touchcancel',e=>{let b=e.target.closest('.pad');if(b)keys[b.dataset.k]=false},{passive:false});
-function loop(t){if(!run)return;let dt=Math.min(.04,(t-last)/1000||0);last=t;if(!dialog)move(dt);draw();hud();requestAnimationFrame(loop)}
-</script></body></html>
+function objective(){
+if(flags.sanctum)return 'Objectif : découvre ce qui se trouve derrière la Porte 13.';
+if(!flags.core)return 'Objectif : trouve le Fragment du Réel.';
+if(!flags.watcherMet)return 'Objectif : parle au Veilleur avec le Fragment.';
+return 'Objectif : retourne devant la Porte 13.';
+}
+function prompt(){
+let n=npcs.find(n=>near(p,n,78));if(n)return '⚡ '+n.name;
+let d=doors.find(d=>near(p,{x:d.x+d.w/2,y:d.y+d.h/2},82));if(d)return '⚡ '+d.name;
+if(Math.hypot(p.x-1250,p.y-610)<78&&!flags.core)return '⚡ Fragment du Réel';
+return 'Explore le bâtiment…';
+}
+function hud(){ui.innerHTML='<div class="top"><div class="panel bars">❤️ '+p.hp+'/10<div class="bar"><div class="hp" style="width:'+p.hp*10+'%"></div></div>🧠 '+p.will+'/5<div class="bar"><div class="will" style="width:'+p.will*20+'%"></div></div></div><div class="panel">🎒 '+(items.length?items.join(' · '):'Vide')+'</div></div><div class="objective panel">🧭 '+objective()+'</div><button class="panel reset" onclick="resetGame()">🗑️ Nouvelle partie</button><div class="hint">'+prompt()+'</div><div class="touch"><button class="pad up" data-k="up">▲</button><button class="pad down" data-k="down">▼</button><button class="pad left" data-k="left">◀</button><button class="pad right" data-k="right">▶</button></div><button class="action" onclick="interact()">⚡<br>AGIR</button>'+(dialog?'<div class="dialog"><div class="name">'+dialog.name+'</div><div class="text">'+dialog.text+'</div><div class="choices">'+dialog.choices.map((c,i)=>'<button type="button" class="choice" data-choice="'+i+'">'+c.t+'</button>').join('')+'</div></div>':'')}
+>
