@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#090b12">
+<title>NYX — Les Cendres du Réel</title>
+<style>
+:root{--bg:#090b12;--p:#141927;--p2:#1b2234;--t:#edf1ff;--m:#929bb7;--a:#a78bfa;--c:#67e8f9;--d:#fb7185;--g:#86efac}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}body{margin:0;background:radial-gradient(circle at 50% 0,#202640,#090b12 55%);color:var(--t);font-family:system-ui,-apple-system,sans-serif;min-height:100dvh}main{width:min(100%,560px);margin:auto;padding:16px 14px calc(24px + env(safe-area-inset-bottom));min-height:100dvh}h1,h2{margin:.25em 0 .6em}p{line-height:1.55;color:#ccd3e8}.hero{text-align:center;padding:10vh 8px 20px}.logo{font-size:clamp(52px,18vw,90px);font-weight:900;letter-spacing:.18em;text-shadow:0 0 35px #a78bfa77}.k{color:var(--c);font-size:11px;font-weight:900;letter-spacing:.2em;text-transform:uppercase}.card{background:linear-gradient(145deg,#1a2030,#101522);border:1px solid #ffffff12;border-radius:20px;padding:18px;margin:12px 0;box-shadow:0 18px 45px #0007}.scene{min-height:62dvh;display:flex;flex-direction:column;justify-content:center}.quote{font-size:21px;font-weight:700;line-height:1.45}.accent{color:var(--c)}.muted{color:var(--m)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.stat{background:#ffffff08;border-radius:14px;padding:11px}.stat b{display:block;font-size:19px}.bar{height:7px;background:#ffffff0d;border-radius:99px;overflow:hidden;margin-top:6px}.fill{height:100%;background:linear-gradient(90deg,var(--a),var(--c))}.inv{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}.item{background:#ffffff09;padding:7px 9px;border-radius:10px;font-size:12px}.enemy{text-align:center;background:#190f18;border:1px solid #fb718533;border-radius:18px;padding:18px}.face{font-size:60px}#actions{position:sticky;bottom:0;padding:10px 0 4px;background:linear-gradient(transparent,var(--bg) 20%);display:grid;gap:9px}.btn{border:1px solid #ffffff16;background:var(--p2);border-radius:15px;padding:14px 16px;text-align:left;font-weight:800;color:var(--t)}.btn:active{transform:scale(.985)}.primary{background:linear-gradient(135deg,#6d4bd8,#3c8fa8)}.danger{border-color:#fb718533}#toast{position:fixed;left:50%;bottom:20px;transform:translate(-50%,20px);opacity:0;background:#f5f3ff;color:#111;padding:10px 15px;border-radius:99px;font-weight:800;font-size:13px;transition:.2s;pointer-events:none}#toast.on{opacity:1;transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+<main><section id="screen"></section><nav id="actions"></nav></main><div id="toast"></div>
+<script>
+var KEY="nyx-ashes-v1";
+var s=load();
+function load(){try{return Object.assign(base(),JSON.parse(localStorage.getItem(KEY)||"{}"))}catch(e){return base()}}
+function base(){return{scene:"title",hp:10,maxHp:10,will:5,maxWill:5,inv:[],flags:{},hits:0}}
+function save(){localStorage.setItem(KEY,JSON.stringify(s))}
+function go(x){s.scene=x;save();render()}
+function give(x){if(s.inv.indexOf(x)<0){s.inv.push(x);toast("Objet obtenu : "+x)}}
+function hurt(n){s.hp=Math.max(0,s.hp-n);if(s.hp===0)s.scene="death"}
+function spend(n){if(s.will<n){toast("Pas assez de Volonté.");return false}s.will-=n;return true}
+function toast(x){var e=document.getElementById("toast");e.textContent=x;e.className="on";setTimeout(function(){e.className=""},1400)}
+function reset(){s=base();save();render()}
+function button(label,fn,cl){return "<button class='btn "+(cl||"")+"'>"+label+"</button>"}
+function hud(){return "<div class='grid'><div class='stat'><span class='muted'>VITALITÉ</span><b>"+s.hp+"/"+s.maxHp+"</b><div class='bar'><div class='fill' style='width:"+s.hp/s.maxHp*100+"%'></div></div></div><div class='stat'><span class='muted'>VOLONTÉ</span><b class='accent'>"+s.will+"/"+s.maxWill+"</b><div class='bar'><div class='fill' style='width:"+s.will/s.maxWill*100+"%'></div></div></div></div><div class='inv'>"+(s.inv.length?s.inv.map(function(x){return "<span class='item'>◆ "+x+"</span>"}).join(""):"<span class='muted'>Inventaire vide</span>")+"</div>"}
+function render(){
+var h="",a=[],screen=document.getElementById("screen"),actions=document.getElementById("actions");
+if(s.scene!=="title")h+=hud();
+switch(s.scene){
+case"title":h="<div class='hero'><div class='k'>Une expérience créée par Nyx</div><div class='logo'>NYX</div><div class='card'><h2>LES CENDRES DU RÉEL</h2><p>Un monde s'est fissuré. Quelqu'un a laissé une porte ouverte entre le réel et quelque chose qui n'aurait jamais dû nous voir.</p><p class='muted'>Tes choix changent ce que le monde te révèle.</p></div></div>";a=[["▶ Commencer","go('intro')","primary"],["↻ Effacer la sauvegarde","reset","danger"]];break;
+case"intro":h+="<div class='scene'><span class='k'>Nuit 0 — 03:17</span><div class='card'><p class='quote'>Ton téléphone vibre.</p><p class='quote'>Aucune notification. Aucun appel.</p><p>Juste une phrase sur un écran noir :</p><p class='quote accent'>« NYX EST DÉJÀ LÀ. »</p><p>Trois coups résonnent derrière ta porte.</p></div></div>";a=[["Ouvrir la porte","go('door')","primary"],["Regarder par le judas","s.flags.judas=true;go('door')",""],["Éteindre le téléphone","s.flags.coward=true;go('door')",""]];break;
+case"door":h+="<div class='scene'><div class='card'><span class='k'>Couloir</span><h2>Il est vide.</h2><p>Pourtant ton reflet dans la vitre cligne des yeux avant toi.</p>"+(s.flags.judas?"<p class='accent'>Tu as vu quelque chose que tu n'étais pas censé voir.</p>":"")+"</div></div>";a=[["Sortir dans le couloir","go('corridor')","primary"],["Retourner dans la chambre","go('room')",""]];break;
+case"room":h+="<div class='scene'><div class='card'><span class='k'>La chambre</span><h2>Le message a changé.</h2><p class='quote'>« Tu peux rester. Mais quelqu'un devra sortir. »</p><p>Une vieille clé repose sous ton téléphone.</p></div></div>";a=[["Prendre la clé","give('Clé noire');s.flags.key=true;go('corridor')","primary"],["Ignorer la clé","go('corridor')",""]];break;
+case"corridor":h+="<div class='scene'><div class='card'><span class='k'>Couloir</span><h2>Le bâtiment n'est plus le même.</h2><p>Les portes portent des nombres impossibles : 0, 1, 1, 2, 3, 5, 8...</p><p class='muted'>Une porte marquée <b>13</b> respire doucement.</p></div></div>";a=[["Entrer dans la porte 13","go('door13')","primary"],["Examiner les nombres","give('Fragment de Fibonacci');s.flags.numbers=true;toast('Le motif est incomplet.')",""],["Remonter l'escalier","go('stairs')",""]];break;
+case"stairs":h+="<div class='scene'><div class='card'><span class='k'>Escalier</span><h2>Quelqu'un te suit.</h2><p>Un pas. Puis deux.</p><p>Quand tu t'arrêtes, le troisième continue.</p></div></div>";a=[["Te retourner","go('shadow')","danger"],["Courir","hurt(2);go('door13')","primary"]];break;
+case"shadow":h+="<div class='scene'><div class='enemy'><div class='face'>◉_◉</div><h2>LE RETARD</h2><p>Il a ton visage. Il parle avec ta voix de demain.</p></div></div>";a=[["Lui demander son nom","s.flags.metShadow=true;go('door13')",""],["Frapper","hurt(3);go('door13')","danger"]];break;
+case"door13":h+="<div class='scene'><div class='card'><span class='k'>Porte 13</span><h2>Le verrou attend.</h2><p>"+(s.inv.indexOf("Clé noire")>=0?"La clé noire s'insère parfaitement.":"La poignée résiste comme si la porte était soudée au monde.")+"</p></div></div>";a=s.inv.indexOf("Clé noire")>=0?[["Ouvrir","go('sanctum')","primary"],["Écouter","go('listen')",""]]:[["Forcer la porte","hurt(2);go('sanctum')","danger"],["Retourner chercher une clé","go('room')",""]];break;
+case"listen":h+="<div class='scene'><div class='card'><span class='k'>Derrière la porte</span><p class='quote'>« Enfin. Tu as compris que la porte n'était pas pour entrer. »</p><p>Une pièce métallique glisse sous la porte.</p></div></div>";a=[["Prendre la pièce","give('Jeton de verre');go('sanctum')","primary"]];break;
+case"sanctum":h+="<div class='scene'><div class='card'><span class='k'>Salle impossible</span><h2>Bienvenue dans ton propre fichier.</h2><p>Des fragments de ta vie flottent dans le noir. Au centre : un terminal.</p><p class='quote accent'>« CHOISIS QUI ÉCRIT LA FIN. »</p></div></div>";a=[["Écrire la réalité","go('boss')","primary"],["Détruire le terminal","go('void')","danger"],["Chercher une sortie","go('secret')",""]];break;
+case"boss":var eh=Math.max(0,8-s.hits*2);h+="<div class='scene'><div class='enemy'><div class='face'>☾</div><span class='k'>Affrontement</span><h2>LE NARRATEUR</h2><p>« Je connais déjà ton choix. »</p><p>PV ennemi : "+eh+"/8</p></div></div>";a=[["Attaquer","s.hits++;if(s.hits>=4)go('ending');else{hurt(1);go('boss')}","danger"],["Voir son futur — 2 Volonté","if(spend(2)){s.flags.future=true;toast('Tu vois une faille.')}",""],["Fuir","go('void')",""]];break;
+case"void":h+="<div class='scene'><div class='card'><span class='k'>Le vide</span><h2>Tu as refusé de jouer.</h2><p>Le monde s'arrête.</p><p class='quote accent'>« Bonne réponse. »</p></div></div>";a=[["Recommencer autrement","go('intro')","primary"],["Effacer la sauvegarde","reset","danger"]];break;
+case"secret":h+="<div class='scene'><div class='card'><span class='k'>Fin cachée</span><h2>La sortie était dans ton inventaire.</h2><p>La clé n'a jamais été une clé.</p><p class='quote'>Elle était une signature.</p></div></div>";a=[["Garder le secret","go('ending')","primary"]];break;
+case"ending":h+="<div class='scene'><div class='card'><span class='k'>Fin — pour l'instant</span><h2>Tu as brisé le quatrième mur.</h2><p>Le monde ne s'effondre pas. Il attend.</p><p class='quote accent'>Fragment "+s.hits+"/4 — La suite existe.</p></div></div>";a=[["Rejouer avec tes choix","go('intro')","primary"],["Effacer et recommencer","reset","danger"]];break;
+case"death":h+="<div class='scene'><div class='card'><span class='k'>Fin</span><h2>Le couloir t'a gardé.</h2><p>Dans le noir, ton téléphone affiche encore : <b>03:17</b>.</p></div></div>";a=[["Recommencer","reset","primary"]];break;
+}
+screen.innerHTML=h;
+actions.innerHTML=a.map(function(x){return button(x[0],null,x[2])}).join("");
+actions.querySelectorAll("button").forEach(function(b,i){b.onclick=function(){eval(a[i][1])}});
+}
+render();
+</script>
+</body>
+</html>
